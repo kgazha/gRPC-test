@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GreeterClientApp";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+package person_manager;
+
+service PersonManager {
+  rpc RegisterNewPerson (PersonRequest) returns (RegisterResponse);
+  rpc CheckAnyPersonExists (VoidRequest) returns (AnyPersonExistsResponse);
+}
+
+message PersonRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.Int32Value age = 2;
+}
+
+message RegisterResponse {
+  string message = 1;
+  google.protobuf.Timestamp start = 2;
+  google.protobuf.Duration duration = 3;
+}
+
+message VoidRequest {}
+
+message AnyPersonExistsResponse {
+  bool exists = 1;
+}
